@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import {render} from 'react-dom'
 
 export default class Movie extends Component {
   constructor(props) {
@@ -11,13 +12,14 @@ export default class Movie extends Component {
 
   componentDidMount() {
  
-    const {id} = this.match.id.params;
+    const {id} = this.match.id;
     this.fetchMovie(id);
+    render()
   }
 
   fetchMovie = id => {
     axios
-      .get(`http://localhost:5000/api/movies/${id}`)
+      .get(`http://localhost:5000/api/movies/$:{id}`)
       .then(response => {
         this.setState(() => ({ movie: response.data }));
       })
@@ -37,10 +39,11 @@ export default class Movie extends Component {
   //   addToSavedList(this.state.movie)
   // }
 
-  render() {
+   render() {
     if (!this.state.movie) {
-      return <div>Loading movie information...</div>;
+     console.log('Movie Loading')
     }
+    .then
 
     const { title, director, metascore, stars } = this.state.movie;
     return (
